@@ -31,7 +31,8 @@ class pcHeader extends React.Component{
     this.setState({modalVisible:value});
   };
   handleClick(e){
-    if(e.key='register'){//点击的是个人中心或登录页面
+    if(e.key=='register'){//点击的是个人中心或登录页面
+
       this.setState({current:'register'});//把点击的设置高亮
       this.setModalVisible(true);//显示弹框
     }else{//点击的不是个人中心或登录页面
@@ -40,6 +41,17 @@ class pcHeader extends React.Component{
   };
   handleSubmit(e){
     //向API提交数据
+    e.preventDefault();//阻止冒泡
+    var myFetchOptions = {
+      method:'GET'
+    }
+    var formData = this.props.form.getFieldsValue();
+    //fetch方法，第一个参数：url，第二个参数：请求方式get
+    fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=register&username=userName&password=password&r_userName="+formData.r_userName+"&r_password="+formData.r_password+"&r_confirmPassword="+formData.r_confirmPassword,myFetchOptions).then(response=>response.json()).then(json=>{
+      this.setState({userNickName:json.userNickName,userId:json.userId});
+    });
+    message.success('请求成功');
+    this.setModalVisible(false);//隐藏模态框
   };
   //<Modal title='用户中心上面额方法依次是弹出窗垂直居中 ,控制显示或隐藏 ,点击关闭按钮，隐藏注册弹框，点击OK按钮，关闭弹框
   render(){
@@ -57,8 +69,8 @@ class pcHeader extends React.Component{
       <Button type='ghost' htmlType='button'>退出</Button>
     </Menu.Item>
     :
-    <Menu.Item>
-      <Icon type='home' className='register'/>注册/登录
+    <Menu.Item key='register' className='register'>
+      <Icon type='home' />注册/登录
     </Menu.Item>;
     return (
       <header>
@@ -81,8 +93,8 @@ class pcHeader extends React.Component{
               <Menu.Item key='guonei'>
                 <Icon type='appstore' />国内
               </Menu.Item>
-              <Menu.Item type='guoji'>
-                <Icon key='appstore' />国际
+              <Menu.Item key='guoji'>
+                <Icon type='appstore' />国际
               </Menu.Item>
               <Menu.Item key='yule'>
                 <Icon type='appstore' />娱乐

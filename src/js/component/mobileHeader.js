@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row,Cal} from 'antd';
+import {Row,Col} from 'antd';
 import {
   Menu,
   Icon,
@@ -15,7 +15,7 @@ const FormItem = Form.Item;
 const SubMenu = Menu.Submenu;
 const TabPane = Tabs.TabPane;
 const MenuItemGroup = Menu.ItemGroup;
-
+import {Router, Route, Link, browserHistory} from 'react-router';
 class MobileHeader extends React.Component{
   constructor(){//构造函数
     super();
@@ -50,12 +50,22 @@ class MobileHeader extends React.Component{
     fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=register&username=userName&password=password&r_userName="+formData.r_userName+"&r_password="+formData.r_password+"&r_confirmPassword="+formData.r_confirmPassword,myFetchOptions).then(response=>response.json()).then(json=>{
       this.setState({userNickName:json.userNickName,userId:json.userId});
     })
+    if(this.state.action=='login'){
+      this.setState({hasLogined:true})
+    }
     message.success('请求成功');
     this.setModalVisible(false);//隐藏模态框
   }
   login(){
     this.setModalVisible(true);//显示模态框
   };
+  callback(){
+    if(key==1){
+      this.setState({action:'login'})
+    }else if(key==2){
+      this.setState({action:'register'})
+    }
+  }
   //用户中心上面的方法依次是:className控制弹框垂直居中显示，控制模态框显示隐藏,点击取消按钮隐藏模态框，点击 ok按钮关闭弹框
   render(){
     let {getFieldDecorator} = this.props.form;//接收全局页面参数
@@ -76,6 +86,17 @@ class MobileHeader extends React.Component{
 
         <Modal title='用户中心' wrapClassName='vertical-center-modal' visible={this.state.modalVisible} onCancel={()=>this.setModalVisible(false)} onOk = {()=>this.setModalVisible(false)} okText = '关闭'>
           <Tabs type='card'>
+            <TabPane key='1' tab='登录'>
+              <Form layout='horizontal' onSubmit={this.handleSubmit.bind(this)}>
+                <FormItem label="账户">
+                  <Input placeholder="请输入您的账号" {...getFieldDecorator('userName')}/>
+                </FormItem>
+                <FormItem label="密码">
+                  <Input type="password" placeholder="请输入您的密码" {...getFieldDecorator('password')}/>
+                </FormItem>
+                <Button type="primary" htmlType="submit">登录</Button>
+              </Form>
+            </TabPane>
             <TabPane tab='注册' key='2'>
               <Form layout='horizontal' onSubmit={this.handleSubmit.bind(this)}>
                 <FormItem lable='账户'>

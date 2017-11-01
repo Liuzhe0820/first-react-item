@@ -430,3 +430,8 @@ iframe {
     margin-top: -.21rem;
     left: .66rem
 }
+.clearfix:after{
+  content:'';
+  display: block;
+  clear:both;
+}

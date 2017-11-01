@@ -1,7 +1,8 @@
-import React from 'react';
+ import React from 'react';
 import {Row,Col} from 'antd';
 import {Tabs,Carousel} from 'antd';
 import PcNewsBlock from './pcNewsBlock';
+import PcNewsImageBlock from './pcNewsImageBlock';
 const TabPane = Tabs.TabPane;
 
 export default class PcNewsContainer extends React.Component{
@@ -30,6 +31,8 @@ export default class PcNewsContainer extends React.Component{
                   <div><img src='./src/img/5.jpg'/></div>
                 </Carousel>
               </div>
+              <PcNewsImageBlock count={6} type='guoji' width='400px' cartTitle='国际头条' imageWidth='112px'>
+              </PcNewsImageBlock>
             </div>
             <Tabs className='tabs_news'>
               <TabPane tab='头条新闻' key='1'>
@@ -51,6 +54,12 @@ export default class PcNewsContainer extends React.Component{
                 <PcNewsBlock count={22} type='tiyu' width="100%" bordered='false'></PcNewsBlock>
               </TabPane>
             </Tabs>
+            <div className='clearfix'>
+            <PcNewsImageBlock count={16} type='guonei' width='100%' cartTitle='国内' imageWidth='125px'>
+            </PcNewsImageBlock>
+            <PcNewsImageBlock count={8} type='yule' width='100%' cartTitle='娱乐' imageWidth='125px'>
+            </PcNewsImageBlock>
+            </div>
           </Col>
           <Col span={2}></Col>
         </Row>

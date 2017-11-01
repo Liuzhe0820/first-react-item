@@ -20,14 +20,38 @@ export default class PcNewsImageBlock extends React.Component{
     .then(json=>this.setState({news:json}));
   }
   render(){
+    const styleImage = {
+        display:'block',
+        width:this.props.imageWidth,
+        height:'90px'
+    };
+    const styleH3 = {
+        width:this.props.imageWidth,
+        whiteSpace:'nowrap',
+        overflow:'hidden',
+        textOverflow:'ellipsis'
+    };
     const{news} = this.state;
     const newsList = news.length?
     news.map((newsItem,index)=>(
+      <div key={index} className='imageblock'>
+        <Link to={`details/${newsItem.uniquekey}`} target='_blank'>
+          <div className='custom-image'>
+            <img alt='' src={newsItem.thumbnail_pic_s} style={styleImage} />
+          </div>
+          <div className='custom-card'>
+            <h3 style={styleH3}>{newsItem.title}</h3>
+            <p style={styleH3}>{newsItem.author_name}</p>
+          </div>
+        </Link>
+      </div>
     ))
+    :
+    '没有加载到新闻内容';
     return(
       <div className='topNewsList'>
-        <Card title={this.props.cartTitle} bordered={true}>
-          
+        <Card title={this.props.cartTitle} bordered={true} style={{width:this.props.width}}>
+          {newsList}
         </Card>
       </div>
     );

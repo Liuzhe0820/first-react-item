@@ -33,9 +33,11 @@ export default class PcNewsBlock extends React.Component{
     '没有加载到任何新闻'
     return(
         <div className='topNewsList'>
-          <ul>
-            {newsList}
-          </ul>
+          <Card>
+            <ul>
+              {newsList}
+            </ul>
+          </Card>
         </div>
     );
   };

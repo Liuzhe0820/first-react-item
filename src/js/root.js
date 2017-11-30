@@ -5,6 +5,7 @@ import { Button } from 'antd';
 import PCIndex from './component/pcIndex.js';
 import PcNewsDetails from './component/pcNewsDetails';
 import MobileIndex from './component/mobileIndex.js';
+import MobileNewsDetails from './component/mobileNewsDetails';
 import 'antd/dist/antd.css';
 import MediaQuery from 'react-responsive';
 
@@ -20,7 +21,10 @@ export default class Root extends React.Component {
           </Router>
         </MediaQuery>
         <MediaQuery query='(max-device-width: 1224px)'>
-          <MobileIndex/>
+          <Router hisstory={hashHistory}>
+            <Route path='/' component={MobileIndex}></Route>
+            <Route path='/details/:uniquekey' component={MobileNewsDetails}></Route>
+          </Router>
         </MediaQuery>
       </div>
     )

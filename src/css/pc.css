@@ -43,7 +43,7 @@
 .carousel {
     width: 400px;
     float: left;
-    height: 400px;
+    /* height: 400px; */
 }
 
 .carousel img {

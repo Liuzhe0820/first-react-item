@@ -10,7 +10,8 @@ import {
     Button,
     CheckBox,
     Modal,
-    Card
+    Card,
+    notification
 } from 'antd';
 const FormItem = Form.Item;
 const SubMenu = Menu.SubMenu;
@@ -35,6 +36,15 @@ class CommonComments extends React.Component {
             });
     };
     addUserCollection(){
+        var myFetchOptions = {
+            method:'GET'
+        };
+        fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=uc&userid=" + localStorage.userid + "&uniquekey=" + this.props.uniquekey, myFetchOptions)
+        .then(response=>response.json())
+        .then(json=>{
+            //收藏成功，全局提示
+            notification['success']({message:'ReactNEWS提醒',description:'此文章收藏成功'});
+        })
 
     };
     handleSubmit(e) {

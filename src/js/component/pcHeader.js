@@ -54,10 +54,12 @@ class pcHeader extends React.Component{
     }
     var formData = this.props.form.getFieldsValue();
     //fetch方法，第一个参数：url，第二个参数：请求方式get
-    fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=register&username=userName&password=password&r_userName="+formData.r_userName+"&r_password="+formData.r_password+"&r_confirmPassword="+formData.r_confirmPassword,myFetchOptions).then(response=>response.json()).then(json=>{
-      this.setState({userNickName:json.NickUserName,userid:json.userId});
-      localStorage.userid= json.UserId;
-			localStorage.userNickName = json.NickUserName;
+    fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action + "&username=" + formData.userName + "&password=" + formData.password + "&r_userName=" + formData.r_userName + "&r_password=" + formData.r_password + "&r_confirmPassword=" + formData.r_confirmPassword, myFetchOptions)
+    .then(response => response.json())
+    .then(json => {
+          this.setState({userNickName: json.NickUserName, userid: json.UserId});
+          localStorage.userid = json.UserId;
+          localStorage.userNickName = json.NickUserName;
     });
     if(this.state.action=='login'){
       this.setState({hasLogined:true});
@@ -74,11 +76,11 @@ class pcHeader extends React.Component{
   };
   logout(){
 		localStorage.userid= '';
-		localStorage.userNickName = '';
+    localStorage.userNickName = '';
 		this.setState({hasLogined:false});
 	};
   render(){
-    let {getFieldDecorator} = this.props.form;//接收全局页面参数
+  let {getFieldProps} = this.props.form; //接收全局页面参数
     //判断是否是登录状态
     const userShow = this.state.hasLogined
     ?
@@ -140,10 +142,14 @@ class pcHeader extends React.Component{
           <TabPane tab='登录' key='1'>
             <Form layout='horizontal' onSubmit={this.handleSubmit.bind(this)}>
               <FormItem label='账户'>
-                <Input placeholder='请输入账号' {...getFieldDecorator('userName')}/>
+< Input placeholder = '请输入账号' {
+  ...getFieldProps('userName')
+} />
               </FormItem>
               <FormItem label='密码'>
-                <Input type='password' placeholder='请输入密码' {...getFieldDecorator('password')}/>
+< Input type = 'password' placeholder = '请输入密码' {
+  ...getFieldProps('password')
+} />
               </FormItem>
               <Button htmlType='submit' type='primary'>登录</Button>
             </Form>
@@ -151,13 +157,19 @@ class pcHeader extends React.Component{
           <TabPane tab='注册' key='2'>
               <Form layout='horizontal' onSubmit={this.handleSubmit.bind(this)}>
                 <FormItem label='账户'>
-                  <Input placeholder='请输入账号' {...getFieldDecorator('r_userName')}/>
+< Input placeholder = '请输入账号' {
+  ...getFieldProps('r_userName')
+} />
                 </FormItem>
                 <FormItem label='密码'>
-                  <Input type='password' placeholder='请输入密码' {...getFieldDecorator('r_password')}/>
+< Input type = 'password' placeholder = '请输入密码' {
+  ...getFieldProps('r_password')
+} />
                 </FormItem>
                 <FormItem label='确认密码'>
-                  <Input type='password' placeholder='再次输入密码' {...getFieldDecorator('r_confirmPassword')}/>
+< Input type = 'password' placeholder = '再次输入密码' {
+  ...getFieldProps('r_confirmPassword')
+} />
                 </FormItem>
                 <Button type='primary' htmlType='submit'>注册</Button>
               </Form>

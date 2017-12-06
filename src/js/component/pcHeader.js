@@ -85,7 +85,7 @@ class pcHeader extends React.Component {
     this.setState({hasLogined: false});
   };
   render() {
-    let {getFieldProps} = this.props.form; //接收全局页面参数
+    let {getFieldDecorator} = this.props.form; //接收全局页面参数
     //判断是否是登录状态
     const userShow = this.state.hasLogined
       ? <Menu.Item ket='logout' className='register'>
@@ -169,10 +169,26 @@ class pcHeader extends React.Component {
                 .handleSubmit
                 .bind(this)}>
                 <FormItem label='账户'>
-                  < Input placeholder='请输入账号' { ...getFieldProps('userName') }/>
+                  {getFieldDecorator('userName',{
+                    rules:[
+                      {
+                        required : true,
+                      }
+                    ]
+                  })(
+                    < Input type='text' placeholder='请输入账号' />
+                  )}
                 </FormItem>
                 <FormItem label='密码'>
-                  < Input type='password' placeholder='请输入密码' { ...getFieldProps('password') }/>
+                  {
+                    getFieldDecorator('password', {
+                      rules: [
+                        {
+                          required: true,
+                        }
+                      ]
+                    })(< Input type = 'password' placeholder = '请输入账号' />)
+                  }
                 </FormItem>
                 <Button htmlType='submit' type='primary'>登录</Button>
               </Form>
@@ -184,16 +200,37 @@ class pcHeader extends React.Component {
                 .handleSubmit
                 .bind(this)}>
                 <FormItem label='账户'>
-                  < Input placeholder='请输入账号' { ...getFieldProps('r_userName') }/>
+                    {
+                      getFieldDecorator('userName', {
+                        rules: [
+                          {
+                            required: true,
+                          }
+                        ]
+                      })(< Input type = 'text' placeholder = '请输入账号' />)
+                    }
                 </FormItem>
                 <FormItem label='密码'>
-                  < Input type='password' placeholder='请输入密码' { ...getFieldProps('r_password') }/>
+                    {
+                      getFieldDecorator('password', {
+                        rules: [
+                          {
+                            required: true,
+                          }
+                        ]
+                      })(< Input type = 'password' placeholder = '请输入账号' />)
+                    }
                 </FormItem>
                 <FormItem label='确认密码'>
-                  <Input
-                    type='password'
-                    placeholder='再次输入密码'
-                    { ...getFieldProps('r_confirmPassword') }/>
+                    {
+                      getFieldDecorator('password', {
+                        rules: [
+                          {
+                            required: true,
+                          }
+                        ]
+                      })(< Input type = 'password' placeholder = '请输入账号' />)
+                    }
                 </FormItem>
                 <Button type='primary' htmlType='submit'>注册</Button>
               </Form>

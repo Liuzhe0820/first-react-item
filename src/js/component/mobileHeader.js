@@ -49,7 +49,6 @@ class MobileHeader extends React.Component {
       .props
       .form
       .getFieldsValue(); //表单数据
-      console.log(formData)
     //fetch方法 第一个参数 url   第二个参数 请求方式
     fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=register&username=userName&p" +
           "assword=password&r_userName=" + formData.r_userName + "&r_password=" + formData.r_password + "&r_confirmPassword=" + formData.r_confirmPassword, myFetchOptions)
@@ -57,7 +56,6 @@ class MobileHeader extends React.Component {
       .then(json => {
       this.setState({userNickName: json.NickUserName, userid: json.UserId});
       })
-    console.log(typeof this.state.action)
     if (this.state.action == 'login') {
       this.setState({hasLogIned: true})
     }

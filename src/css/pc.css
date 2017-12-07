@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 #mainContainer {
     width: 100%;
 }

@@ -91,7 +91,7 @@ class pcHeader extends React.Component {
       ? <Menu.Item ket='logout' className='register'>
           <Button type='primary' htmlType='button'>{this.state.userNickName}</Button>
           &nbsp;&nbsp;
-          <Link target='_blank'>
+          <Link target='_blank' to={`/usercenter`}>
             <Button type='dashed' htmlType='button'>个人中心</Button>
           </Link>
           &nbsp;&nbsp;
@@ -187,7 +187,7 @@ class pcHeader extends React.Component {
                           required: true,
                         }
                       ]
-                    })(< Input type = 'password' placeholder = '请输入账号' />)
+                    })(< Input type = 'password' placeholder = '请输入密码' />)
                   }
                 </FormItem>
                 <Button htmlType='submit' type='primary'>登录</Button>
@@ -218,7 +218,7 @@ class pcHeader extends React.Component {
                             required: true,
                           }
                         ]
-                      })(< Input type = 'password' placeholder = '请输入账号' />)
+                      })(< Input type = 'password' placeholder = '请输入密码' />)
                     }
                 </FormItem>
                 <FormItem label='确认密码'>
@@ -229,7 +229,7 @@ class pcHeader extends React.Component {
                             required: true,
                           }
                         ]
-                      })(< Input type = 'password' placeholder = '请输入账号' />)
+                      })(< Input type = 'password' placeholder = '请确认密码' />)
                     }
                 </FormItem>
                 <Button type='primary' htmlType='submit'>注册</Button>

@@ -1,6 +1,6 @@
-body {
+/* body {
     overflow: hidden;
-}
+} */
 
 #mainContainer {
     width: 100%;
@@ -109,7 +109,7 @@ body {
 }
 
 .tabs_product {
-    width: 300px;
+    width: 250px;
     padding-left: 10px;
     float: left;
 }
